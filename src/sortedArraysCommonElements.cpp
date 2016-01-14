@@ -21,7 +21,36 @@ struct transaction {
 	char date[11];
 	char description[20];
 };
-
+long long int fun(char *date)
+{
+	int d, m, y, i, year, mon, day, count = 0, j = 0;
+	int b[10];
+	for (i = 0; i<10; i++)
+		b[i] = (*(date + i) - 48);
+	d = (b[0] * 10) + b[1];
+	m = (b[3] * 10) + b[4];
+	y = (b[6] * 1000) + (b[7] * 100) + (b[8] * 10) + b[9];
+	return (d * 1000000) + (m * 10000) + y;
+}
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+	struct transaction *C;
+	if (A == NULL || B == NULL)
+		return NULL;
+	C = (struct transaction*)malloc((ALen + BLen)*sizeof(struct transaction));
+	int k = -1, j = 0;
+	for (int i = 0; i < ALen; i++)
+	{
+		for (int j = k+1; j < BLen; j++)
+		{
+			if (fun(A[i].date) == fun(B[j].date))
+			{
+				C[i] = A[j];
+				k = j;
+				break;
+			}
+		}
+	}
+	if (k == -1)
+		return NULL;
+	return C;
 }

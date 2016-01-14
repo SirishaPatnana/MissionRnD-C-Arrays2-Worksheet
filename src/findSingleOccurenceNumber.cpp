@@ -12,7 +12,22 @@ ERROR CASES: Return -1 for invalid inputs.
 
 NOTES:
 */
-
+#include<conio.h>
+#include<stdlib.h>
 int findSingleOccurenceNumber(int *A, int len) {
-	return -1;
+	int *B;
+	if (A == NULL)
+		return -1;
+	B = (int*)malloc(len*sizeof(int));
+	for (int i = 0; i < len; i++)
+	{
+		int c = 0;
+		for (int j = 0; j < len; j++)
+			if (A[i] == A[j])
+				c++;
+		if (c == 1)
+			return A[i];
+
+	}
+	return - 1;
 }
